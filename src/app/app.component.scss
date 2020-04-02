@@ -1,0 +1,13 @@
+:host {
+  background-color: #ff7272;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.app {
+  &__wall {
+    background-color: #ffb385;
+    height: 10rem;
+  }
+}

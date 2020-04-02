@@ -1,0 +1,9 @@
+<button class="create__btn" (click)="onCreate()">
+  {{ createBtnText }}
+</button>
+<form *ngIf="createNote" class="create__form" [formGroup]="createForm" (submit)="onSubmit()">
+  <input type="text" class="create__input" formControlName="subject">
+  <textarea class="create__text" formControlName="content">
+  </textarea>
+  <button class="create__btn-submit" [disabled]="createForm.invalid">Done</button>
+</form>
