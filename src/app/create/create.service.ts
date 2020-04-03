@@ -12,9 +12,11 @@ export class CreateService {
       subject,
       content
     };
-    this.http.post('127.0.0.1:8000/api/notes/', body)
+    this.http.post('http://localhost:3000/api/notes/', body)
     .subscribe(res => {
       console.log(res);
+    }, err => {
+      console.log(err);
     });
   }
 }
