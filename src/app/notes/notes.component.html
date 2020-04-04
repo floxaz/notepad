@@ -1,0 +1,10 @@
+<div class="notes__empty" *ngIf="notes.length === 0">
+  The wall is empty...
+</div>
+<div class="notes__show">
+  <app-note
+  *ngFor="let note of notes"
+  [subject]="note.subject"
+  [content]="note.content"
+  ></app-note>
+</div>
