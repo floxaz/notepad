@@ -1,7 +1,10 @@
 <div class="row">
-  <h1>Work in progress!</h1>
   <div class="app__menu">
-    <app-create></app-create>
+    <button class="app__create btn" (click)="onCreate()">
+      {{ createBtnText }}
+    </button>
+    <app-filter></app-filter>
+    <app-create *ngIf="createNote"></app-create>
   </div>
   <div class="app__wall">
   </div>

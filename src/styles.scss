@@ -18,11 +18,36 @@ body {
 }
 
 body {
+  font-family: 'Inria Sans', sans-serif;
   font-size: 1.6rem;
 }
 
 .row {
-  max-width: 80rem;
+  max-width: 70rem;
   margin: 0 auto;
 }
 
+.btn {
+  background-color: #ffd31d;
+  border: none;
+  border-radius: .3rem;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Inria Sans', sans-serif;
+  font-size: 1.6rem;
+  margin-left: auto;
+  outline: none;
+  padding: 1rem 2rem;
+  width: 15rem;
+  transition: all .1s ease;
+
+  &:active {
+    transform: translateY(.2rem);
+  }
+
+  &:disabled {
+    background-color: rgba(#ffd31d, .3);
+    color: rgba(#fff, .3);
+    cursor: default;
+  }
+}

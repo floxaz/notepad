@@ -11,13 +11,6 @@ export class CreateComponent implements OnInit {
   constructor(private createService: CreateService) { }
 
   createForm: FormGroup;
-  createNote = false;
-  createBtnText = 'Create';
-
-  onCreate() {
-    this.createNote = !this.createNote;
-    this.createBtnText = this.createNote ? 'Close' : 'Create';
-  }
 
   onSubmit() {
     console.log(this.createForm);

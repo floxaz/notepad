@@ -1,9 +1,6 @@
-<button class="create__btn" (click)="onCreate()">
-  {{ createBtnText }}
-</button>
-<form *ngIf="createNote" class="create__form" [formGroup]="createForm" (submit)="onSubmit()">
-  <input type="text" class="create__input" formControlName="subject">
-  <textarea class="create__text" formControlName="content">
+<form class="create__form" [formGroup]="createForm" (submit)="onSubmit()">
+  <input type="text" class="create__subject" placeholder="Subject" formControlName="subject">
+  <textarea class="create__content" placeholder="Content" formControlName="content">
   </textarea>
-  <button class="create__btn-submit" [disabled]="createForm.invalid">Done</button>
+  <button class="create__btn-submit btn" [disabled]="createForm.invalid">Attach</button>
 </form>

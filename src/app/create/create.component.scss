@@ -1,0 +1,32 @@
+:host {
+  background-color: #363636;
+  border-radius: .3rem;
+  display: block;
+}
+
+.create {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    padding: 4rem 6rem;
+  }
+
+  &__subject,
+  &__content {
+    background-color: #363636;
+    border: none;
+    border: 1px solid #fae7cb;
+    border-radius: .3rem;
+    color: #fae7cb;
+    font-family: 'Inria Sans', sans-serif;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    outline: none;
+    padding: 2rem 1rem;
+  }
+
+  &__content {
+    resize: none;
+    height: 15rem;
+  }
+}

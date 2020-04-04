@@ -7,11 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CreateComponent } from './create/create.component';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateComponent
+    CreateComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
