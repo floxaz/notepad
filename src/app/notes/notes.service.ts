@@ -7,7 +7,7 @@ import * as moment from 'moment';
   providedIn: 'root'
 })
 export class NotesService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   fetchNotes() {
     return this.http.get<any>('http://localhost:3000/api/notes')

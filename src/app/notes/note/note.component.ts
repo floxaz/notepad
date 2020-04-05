@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NoteService } from './note.service';
 
 @Component({
   selector: 'app-note',
@@ -10,4 +11,10 @@ export class NoteComponent {
   @Input() subject: string;
   @Input() content: string;
   @Input() date: string;
+
+  constructor(private noteService: NoteService) {}
+
+  onDelete() {
+    this.noteService.deleteNote(this.id);
+  }
 }
