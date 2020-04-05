@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -14,4 +14,8 @@ export class AppComponent {
     this.createBtnText = this.createNote ? 'Close' : 'Create';
   }
 
+  closeCreateNote() {
+    this.createNote = false;
+    this.createBtnText = 'Create';
+  }
 }

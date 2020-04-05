@@ -4,7 +4,7 @@
       {{ createBtnText }}
     </button>
     <app-filter></app-filter>
-    <app-create *ngIf="createNote"></app-create>
+    <app-create *ngIf="createNote" (createdNewNote)="closeCreateNote()"></app-create>
   </div>
   <div class="app__wall">
     <app-notes></app-notes>

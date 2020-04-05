@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CreateService } from './create.service';
 
@@ -8,6 +8,7 @@ import { CreateService } from './create.service';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
+  @Output() createdNewNote = new EventEmitter<void>();
   constructor(private createService: CreateService) { }
 
   createForm: FormGroup;
@@ -16,6 +17,8 @@ export class CreateComponent implements OnInit {
     console.log(this.createForm);
     const { subject, content } = this.createForm.value;
     this.createService.createNewNote(subject, content);
+    this.createForm.reset();
+    this.createdNewNote.emit();
   }
 
   ngOnInit() {
