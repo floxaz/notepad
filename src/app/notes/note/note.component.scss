@@ -5,4 +5,50 @@
   display: block;
   padding: 2rem;
   margin-bottom: 1rem;
+  min-height: 15rem;
+  position: relative;
+}
+
+.note {
+  &__subject {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  &__options {
+    display: flex;
+    justify-content: space-between;
+    width: 3.5rem;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  &__edit,
+  &__delete {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+  }
+
+  &__icon {
+    fill: #cebca3;
+    width: 1.2rem;
+    height: 1.2rem;
+    transition: fill .3s ease;
+  }
+
+  &__icon:hover {
+    fill: #272727;
+  }
+
+  &__date {
+    color: #cebca3;
+    font-size: 1.2rem;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+  }
 }

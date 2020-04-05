@@ -6,6 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./note.component.scss']
 })
 export class NoteComponent {
+  @Input() id: string;
   @Input() subject: string;
   @Input() content: string;
+  @Input() date: string;
 }
