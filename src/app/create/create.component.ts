@@ -1,6 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CreateService } from './create.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create',
@@ -8,10 +10,14 @@ import { CreateService } from './create.service';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
+  @Input() creationMode = false;
   @Output() createdNewNote = new EventEmitter<void>();
-  constructor(private createService: CreateService) { }
-
+  btnText = 'Attach';
   createForm: FormGroup;
+  constructor(
+    private createService: CreateService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   onSubmit() {
     console.log(this.createForm);
@@ -21,11 +27,36 @@ export class CreateComponent implements OnInit {
     this.createdNewNote.emit();
   }
 
-  ngOnInit() {
+  onGoBack() {
+    this.router.navigate(['/']);
+  }
+
+  setForm = (subject = null, content = null) => {
     this.createForm = new FormGroup({
-      subject: new FormControl(null, [Validators.required, Validators.maxLength(30)]),
-      content: new FormControl(null, [Validators.required, Validators.maxLength(250)])
+      subject: new FormControl(subject, [Validators.required, Validators.maxLength(30)]),
+      content: new FormControl(content, [Validators.required, Validators.maxLength(250)])
     });
+  }
+
+  ngOnInit() {
+    this.setForm();
+
+    if (!this.creationMode) {
+      this.btnText = 'Edit';
+      this.route.params
+        .pipe(
+          map(({ id }) => id),
+          switchMap(id => {
+            return this.createService.fetchOneNote(id);
+          }))
+        .pipe(map(({ note }) => note))
+        .subscribe(({ subject, content }) => {
+          this.createForm.setValue({
+            subject,
+            content
+          });
+        });
+    }
   }
 }
 

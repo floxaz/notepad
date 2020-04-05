@@ -1,0 +1,15 @@
+.home {
+  &__wall {
+    background-color: #36363698;
+    border-radius: .3rem;
+    padding: 4rem 6rem;
+  }
+
+  &__create {
+    margin-bottom: 1rem;
+  }
+
+  &__close {
+    background-color: #fe346e;
+  }
+}

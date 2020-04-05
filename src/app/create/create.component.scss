@@ -1,12 +1,14 @@
-:host {
-  background-color: #363636;
-  border-radius: .3rem;
-  display: block;
-}
+// :host {
+//   // background-color: #363636;
+//   // border-radius: .3rem;
+//   display: block;
+// }
 
 .create {
   &__form {
     display: flex;
+    background-color: #363636;
+    border-radius: .3rem;
     flex-direction: column;
     padding: 4rem 6rem;
   }
@@ -28,5 +30,14 @@
   &__content {
     resize: none;
     height: 15rem;
+  }
+
+  &__options {
+    display: flex;
+  }
+
+  &__back {
+    margin: 0 auto 1rem 0;
+    text-align: center;
   }
 }

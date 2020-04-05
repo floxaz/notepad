@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NoteService } from './note.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-note',
@@ -12,7 +13,19 @@ export class NoteComponent {
   @Input() content: string;
   @Input() date: string;
 
-  constructor(private noteService: NoteService) {}
+  constructor(
+    private noteService: NoteService,
+    private router: Router) {}
+
+  onEdit() {
+    this.router.navigate(['edit', this.id]);
+    console.log('kek');
+    // this.router.createUrlTree(['edit'], {
+    //   queryParams: {
+    //     id: this.id
+    //   }
+    // });
+  }
 
   onDelete() {
     this.noteService.deleteNote(this.id);

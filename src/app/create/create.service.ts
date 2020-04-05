@@ -29,4 +29,11 @@ export class CreateService {
       console.log(err);
     });
   }
+
+  fetchOneNote(id: string) {
+    return this.http.get<any>(`http://localhost:3000/api/notes/${id}`)
+    .pipe(map(res => {
+      return { ...res.data };
+    }));
+  }
 }

@@ -1,7 +1,7 @@
 <div class="note__subject">{{ subject }}</div>
 <div class="note__content">{{ content }}</div>
 <div class="note__options">
-  <button class="note__edit">
+  <button class="note__edit" (click)="onEdit()">
     <svg class="note__icon">
       <use href="assets/images/sprite.svg#icon-wrench" />
     </svg>

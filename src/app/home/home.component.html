@@ -1,0 +1,10 @@
+<div class="home__menu">
+  <button class="home__create btn" [ngClass]="{home__close: createNote}" (click)="onCreate()">
+    {{ createBtnText }}
+  </button>
+  <app-filter></app-filter>
+  <app-create *ngIf="createNote" [creationMode]="true" (createdNewNote)="closeCreateNote()"></app-create>
+</div>
+<div class="home__wall">
+  <app-notes></app-notes>
+</div>
