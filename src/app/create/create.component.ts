@@ -15,6 +15,8 @@ export class CreateComponent implements OnInit {
   btnText = 'Attach';
   createForm: FormGroup;
   editedNoteId = undefined;
+  subject: string;
+  content: string;
   constructor(
     private createService: CreateService,
     private route: ActivatedRoute,
@@ -41,6 +43,27 @@ export class CreateComponent implements OnInit {
     });
   }
 
+  setUpdateForm = () => {
+    this.btnText = 'Edit';
+    this.route.params
+      .pipe(
+        map(({ id }) => id),
+        switchMap(id => {
+          this.editedNoteId = id;
+          return this.createService.fetchOneNote(id);
+        }))
+      .pipe(map(({ note }) => note))
+      .subscribe(({ subject, content }) => {
+        this.subject = subject;
+        this.content = content;
+
+        this.createForm.setValue({
+          subject,
+          content
+        });
+      });
+  }
+
   private attachNote = () => {
     console.log(this.createForm);
     const { subject, content } = this.createForm.value;
@@ -55,8 +78,7 @@ export class CreateComponent implements OnInit {
       content: this.createForm.get('content').value
     };
     this.createService.updateNote(this.editedNoteId, body)
-    .subscribe(note => {
-      console.log(note);
+    .subscribe(() => {
       this.createForm.reset();
       this.onGoBack();
     });
@@ -66,21 +88,7 @@ export class CreateComponent implements OnInit {
     this.setForm();
 
     if (!this.creationMode) {
-      this.btnText = 'Edit';
-      this.route.params
-        .pipe(
-          map(({ id }) => id),
-          switchMap(id => {
-            this.editedNoteId = id;
-            return this.createService.fetchOneNote(id);
-          }))
-        .pipe(map(({ note }) => note))
-        .subscribe(({ subject, content }) => {
-          this.createForm.setValue({
-            subject,
-            content
-          });
-        });
+      this.setUpdateForm();
     }
   }
 }

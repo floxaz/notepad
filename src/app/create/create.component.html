@@ -5,5 +5,5 @@
   <input type="text" class="create__subject" placeholder="Subject" formControlName="subject">
   <textarea class="create__content" placeholder="Content" formControlName="content">
   </textarea>
-  <button class="create__btn-submit btn" [disabled]="createForm.invalid">{{ btnText }}</button>
+  <button class="create__btn-submit btn" [disabled]="createForm.invalid || createForm.pristine">{{ btnText }}</button>
 </form>
