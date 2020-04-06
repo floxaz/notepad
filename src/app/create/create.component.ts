@@ -14,17 +14,20 @@ export class CreateComponent implements OnInit {
   @Output() createdNewNote = new EventEmitter<void>();
   btnText = 'Attach';
   createForm: FormGroup;
+  editedNoteId = undefined;
   constructor(
     private createService: CreateService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   onSubmit() {
-    console.log(this.createForm);
-    const { subject, content } = this.createForm.value;
-    this.createService.createNewNote(subject, content);
-    this.createForm.reset();
-    this.createdNewNote.emit();
+    if (this.creationMode) {
+      this.attachNote();
+    } else {
+      if (this.editedNoteId) {
+        this.editNote();
+      }
+    }
   }
 
   onGoBack() {
@@ -38,6 +41,27 @@ export class CreateComponent implements OnInit {
     });
   }
 
+  private attachNote = () => {
+    console.log(this.createForm);
+    const { subject, content } = this.createForm.value;
+    this.createService.createNewNote(subject, content);
+    this.createForm.reset();
+    this.createdNewNote.emit();
+  }
+
+  private editNote = () => {
+    const body = {
+      subject: this.createForm.get('subject').value,
+      content: this.createForm.get('content').value
+    };
+    this.createService.updateNote(this.editedNoteId, body)
+    .subscribe(note => {
+      console.log(note);
+      this.createForm.reset();
+      this.onGoBack();
+    });
+  }
+
   ngOnInit() {
     this.setForm();
 
@@ -47,6 +71,7 @@ export class CreateComponent implements OnInit {
         .pipe(
           map(({ id }) => id),
           switchMap(id => {
+            this.editedNoteId = id;
             return this.createService.fetchOneNote(id);
           }))
         .pipe(map(({ note }) => note))

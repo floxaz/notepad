@@ -36,4 +36,11 @@ export class CreateService {
       return { ...res.data };
     }));
   }
+
+  updateNote(id: string, body: any) {
+    return this.http.patch<any>(`http://localhost:3000/api/notes/${id}`, body)
+    .pipe(map(res => {
+      return res.data.note;
+    }));
+  }
 }
