@@ -38,6 +38,8 @@ export class CreateService {
   }
 
   updateNote(id: string, body: any) {
+    body.date = new Date().toISOString();
+    body.edited = true;
     return this.http.patch<any>(`http://localhost:3000/api/notes/${id}`, body)
     .pipe(map(res => {
       return res.data.note;

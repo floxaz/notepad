@@ -13,12 +13,19 @@ export class NotesService {
     return this.http.get<any>('http://localhost:3000/api/notes')
     .pipe(map(res => {
       const { notes } = res.data;
-      notes.forEach(note => {
-        note.date = moment(note.date).fromNow();
-      });
-      return notes;
+      return this.formatData(notes);
     }), catchError(err => {
       return null;
     }));
+  }
+
+  private formatData(notes: any) {
+    notes.forEach(note => {
+      note.date = moment(note.date).fromNow();
+      if (note.edited) {
+        note.date = 'edited ' + note.date;
+      }
+    });
+    return notes;
   }
 }
