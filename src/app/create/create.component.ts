@@ -17,6 +17,13 @@ export class CreateComponent implements OnInit {
   editedNoteId = undefined;
   subject: string;
   content: string;
+  sheets = [
+    '#fae7cb',
+    '#4cd3c2',
+    '#e6739f',
+    '#ffbd69',
+    '#f2ed6f'
+  ];
   constructor(
     private createService: CreateService,
     private route: ActivatedRoute,
@@ -39,7 +46,8 @@ export class CreateComponent implements OnInit {
   setForm = (subject = null, content = null) => {
     this.createForm = new FormGroup({
       subject: new FormControl(subject, [Validators.required, Validators.maxLength(30)]),
-      content: new FormControl(content, [Validators.required, Validators.maxLength(250)])
+      content: new FormControl(content, [Validators.required, Validators.maxLength(250)]),
+      sheet: new FormControl(this.sheets[0])
     });
   }
 
@@ -59,8 +67,10 @@ export class CreateComponent implements OnInit {
 
         this.createForm.setValue({
           subject,
-          content
+          content,
+          sheet: this.sheets[0]
         });
+        console.log(this.createForm);
       });
   }
 
