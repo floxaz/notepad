@@ -16,6 +16,10 @@ const noteSchema = new mongoose.Schema({
   edited: {
     type: Boolean,
     default: false
+  },
+  sheet: {
+    type: String,
+    required: true
   }
 });
 

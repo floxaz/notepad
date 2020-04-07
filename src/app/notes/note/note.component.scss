@@ -1,5 +1,8 @@
 :host {
   background-color: #fae7cb;
+}
+
+.note {
   border-radius: .3rem;
   color: #272727;
   display: block;
@@ -7,9 +10,7 @@
   margin-bottom: 1rem;
   min-height: 15rem;
   position: relative;
-}
 
-.note {
   &__subject {
     font-size: 2rem;
     font-weight: 700;
@@ -40,7 +41,11 @@
     transition: fill .3s ease;
   }
 
-  &__icon:hover {
+  // &__icon:hover {
+  //   fill: #272727;
+  // }
+
+  &__hovered {
     fill: #272727;
   }
 

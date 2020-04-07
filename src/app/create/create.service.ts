@@ -11,10 +11,11 @@ export class CreateService {
   created = new Subject<any>();
   constructor(private http: HttpClient) {}
 
-  createNewNote(subject: string, content: string) {
+  createNewNote(subject: string, content: string, sheet: string) {
     const body = {
       subject,
-      content
+      content,
+      sheet
     };
     this.http.post<any>('http://localhost:3000/api/notes/', body)
     .pipe(map(res => {

@@ -42,7 +42,8 @@ exports.createNote = async (req, res) => {
   try {
     const newNote = await Note.create({
       subject: req.body.subject,
-      content: req.body.content
+      content: req.body.content,
+      sheet: req.body.sheet
     });
     res.json({
       status: 'success',
