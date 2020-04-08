@@ -13,6 +13,7 @@ import { NotesComponent } from './notes/notes.component';
 import { NoteComponent } from './notes/note/note.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { FooterComponent } from './footer/footer.component';
+import { NotFoundComponent } from './notFound/notFoundComponent';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FooterComponent } from './footer/footer.component';
     NotesComponent,
     NoteComponent,
     FooterComponent,
+    NotFoundComponent,
     LoadingComponent
   ],
   imports: [

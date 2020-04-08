@@ -1,0 +1,12 @@
+.page {
+  &__content {
+    color: #fae7cb;
+    text-align: center;
+    padding: 6rem 0;
+  }
+
+  &__error {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+}
