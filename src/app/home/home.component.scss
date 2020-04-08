@@ -2,8 +2,8 @@
   &__wall {
     background-color: #36363698;
     border-radius: .3rem;
-    margin-bottom: 6rem;
-    padding: 4rem 6rem;
+    margin-bottom: 1rem;
+    padding: 1rem 2rem;
   }
 
   &__create {
@@ -12,5 +12,32 @@
 
   &__close {
     background-color: #fe346e;
+  }
+}
+
+@media(min-width: 26.56em) {
+  .home {
+    &__wall {
+      padding: 2rem 3rem;
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+@media(min-width: 48em) {
+  .home {
+    &__wall {
+      padding: 3rem 4rem;
+      margin-bottom: 4rem;
+    }
+  }
+}
+
+@media(min-width: 64em) {
+  .home {
+    &__wall {
+      padding: 4rem 6rem;
+      margin-bottom: 6rem;
+    }
   }
 }

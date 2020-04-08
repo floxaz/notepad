@@ -4,11 +4,23 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 6rem 0 0 0;
+  padding: 1rem 0 0 0;
 
   .app {
     &__content {
       flex-grow: 2;
     }
+  }
+}
+
+@media(min-width: 48em) {
+  :host {
+    padding: 3rem 0 0 0;
+  }
+}
+
+@media(min-width: 64em) {
+  :host {
+    padding: 6rem 0 0 0;
   }
 }

@@ -4,7 +4,7 @@
     background-color: #363636;
     border-radius: .3rem;
     flex-direction: column;
-    padding: 4rem 6rem;
+    padding: 2rem 2rem;
   }
 
   &__subject,
@@ -36,6 +36,8 @@
     margin-bottom: 2rem;
     position: relative;
     width: 18rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   &__color {
@@ -68,5 +70,35 @@
     padding: 6rem 0;
     text-align: center;
   }
+
+  &__btn-submit {
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
+
+@media(min-width: 26.56em) {
+  .create {
+    &__form {
+      padding: 3rem 4rem;
+    }
+    &__sheets {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    &__btn-submit {
+      margin-right: 0;
+      margin-left: auto;
+    }
+  }
+}
+
+@media(min-width: 48em) {
+  .create {
+    &__form {
+      padding: 4rem 6rem;
+    }
+  }
+}
