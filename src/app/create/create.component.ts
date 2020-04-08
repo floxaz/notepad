@@ -25,6 +25,7 @@ export class CreateComponent implements OnInit {
     '#ffbd69',
     '#f2ed6f'
   ];
+  error = false;
   constructor(
     private createService: CreateService,
     private route: ActivatedRoute,
@@ -62,7 +63,6 @@ export class CreateComponent implements OnInit {
           this.editedNoteId = id;
           return this.createService.fetchOneNote(id);
         }))
-      .pipe(map(({ note }) => note))
       .subscribe(({ subject, content }) => {
         this.loading = false;
         this.subject = subject;
@@ -73,6 +73,9 @@ export class CreateComponent implements OnInit {
           content,
           sheet: this.sheets[0]
         });
+      }, () => {
+        this.error = true;
+        this.loading = false;
       });
   }
 

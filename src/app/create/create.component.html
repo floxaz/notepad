@@ -1,8 +1,11 @@
-<div class="crate__options" *ngIf="!creationMode">
+<div class="create__options" *ngIf="!creationMode">
   <div class="create__back btn" (click)="onGoBack()">Back</div>
 </div>
 <app-loading *ngIf="loading"></app-loading>
-<form class="create__form" [formGroup]="createForm" (submit)="onSubmit()" *ngIf="!loading">
+<div class="create__error" *ngIf="error">
+  Such note does not exist.
+</div>
+<form class="create__form" [formGroup]="createForm" (submit)="onSubmit()" *ngIf="!loading && !error">
   <input type="text" class="create__subject" placeholder="Subject" formControlName="subject">
   <textarea class="create__content" placeholder="Content" formControlName="content">
   </textarea>
