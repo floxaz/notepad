@@ -77,7 +77,6 @@ export class CreateComponent implements OnInit {
   }
 
   private attachNote = () => {
-    console.log(this.createForm);
     const { subject, content, sheet } = this.createForm.value;
     this.createService.createNewNote(subject, content, sheet);
     this.createForm.reset();

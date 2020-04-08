@@ -24,7 +24,6 @@ export class CreateService {
       return note;
     }))
     .subscribe(note => {
-      console.log(note);
       this.created.next(note);
     }, err => {
       console.log(err);
