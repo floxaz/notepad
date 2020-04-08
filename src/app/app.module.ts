@@ -11,6 +11,7 @@ import { CreateComponent } from './create/create.component';
 import { FilterComponent } from './filter/filter.component';
 import { NotesComponent } from './notes/notes.component';
 import { NoteComponent } from './notes/note/note.component';
+import { LoadingComponent } from './shared/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NoteComponent } from './notes/note/note.component';
     CreateComponent,
     FilterComponent,
     NotesComponent,
-    NoteComponent
+    NoteComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import { Note } from '../shared/note.model';
 })
 export class NotesComponent implements OnInit, OnDestroy {
   notes: Note[] = [];
+  loading = true;
   deletedSub: Subscription;
   createdSub: Subscription;
 
@@ -25,7 +26,7 @@ export class NotesComponent implements OnInit, OnDestroy {
     this.notesService.fetchNotes()
       .subscribe(res => {
         this.notes = res;
-        console.log(this.notes);
+        this.loading = false;
       });
 
     this.deletedSub = this.noteService.deleted

@@ -12,6 +12,7 @@ import { map, switchMap } from 'rxjs/operators';
 export class CreateComponent implements OnInit {
   @Input() creationMode = false;
   @Output() createdNewNote = new EventEmitter<void>();
+  loading = false;
   btnText = 'Attach';
   createForm: FormGroup;
   editedNoteId = undefined;
@@ -52,6 +53,7 @@ export class CreateComponent implements OnInit {
   }
 
   setUpdateForm = () => {
+    this.loading = true;
     this.btnText = 'Edit';
     this.route.params
       .pipe(
@@ -62,6 +64,7 @@ export class CreateComponent implements OnInit {
         }))
       .pipe(map(({ note }) => note))
       .subscribe(({ subject, content }) => {
+        this.loading = false;
         this.subject = subject;
         this.content = content;
 
