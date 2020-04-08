@@ -1,7 +1,15 @@
 :host {
   background-color: #272727;
-  display: block;
+  display: flex;
+  flex-direction: column;
   //height: 100%;
   width: 100%;
-  padding: 6rem 0;
+  height: 100%;
+  padding: 6rem 0 0 0;
+
+  .app {
+    &__content {
+      flex-grow: 2;
+    }
+  }
 }

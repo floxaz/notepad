@@ -1,0 +1,23 @@
+.footer {
+  background-color: #36363698;
+  padding: 4rem 0;
+
+  &__content {
+    display: flex;
+    color: #616161;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__link {
+    display: inline-block;
+    text-decoration: none;
+    color: lighten(#616161, 10%);
+    transition: all .2s ease;
+  }
+
+  &__link:hover {
+    transform: scale(1.02);
+    color: #ffd31d;
+  }
+}
