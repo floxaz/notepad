@@ -3,6 +3,7 @@ import { NotesService } from './notes.service';
 import { NoteService } from './note/note.service';
 import { Subscription } from 'rxjs';
 import { CreateService } from '../create/create.service';
+import { Note } from '../shared/note.model';
 
 @Component({
   selector: 'app-notes',
@@ -10,7 +11,7 @@ import { CreateService } from '../create/create.service';
   styleUrls: ['./notes.component.scss']
 })
 export class NotesComponent implements OnInit, OnDestroy {
-  notes = [];
+  notes: Note[] = [];
   deletedSub: Subscription;
   createdSub: Subscription;
 

@@ -41,12 +41,8 @@
     transition: fill .3s ease;
   }
 
-  // &__icon:hover {
-  //   fill: #272727;
-  // }
-
-  &__hovered {
-    fill: #272727;
+  &__icon:hover {
+    fill: #272727 !important;
   }
 
   &__date {

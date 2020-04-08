@@ -70,7 +70,6 @@ export class CreateComponent implements OnInit {
           content,
           sheet: this.sheets[0]
         });
-        console.log(this.createForm);
       });
   }
 
@@ -85,7 +84,8 @@ export class CreateComponent implements OnInit {
   private editNote = () => {
     const body = {
       subject: this.createForm.get('subject').value,
-      content: this.createForm.get('content').value
+      content: this.createForm.get('content').value,
+      sheet: this.createForm.get('sheet').value
     };
     this.createService.updateNote(this.editedNoteId, body)
     .subscribe(() => {
