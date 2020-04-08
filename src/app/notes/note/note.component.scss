@@ -17,6 +17,10 @@
     margin-bottom: 1rem;
   }
 
+  &__content {
+    overflow-wrap: break-word;
+  }
+
   &__options {
     display: flex;
     justify-content: space-between;

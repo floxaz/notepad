@@ -2,6 +2,6 @@ export class Note {
   _id: string;
   subject: string;
   content: string;
-  data: string;
+  date: string;
   sheet: string;
 }
