@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const noteRoutes = require('./routes/noteRoutes');
 
 const app = express();
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'development') {
   app.use(cors());
 }
 
