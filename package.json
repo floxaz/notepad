@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "server": "nodemon backend/server.js",
-    "start": "NODE_ENV=production backend/server.js",
+    "start": "NODE_ENV=production node backend/server.js",
     "heroku-postbuild": "npm install && npm run build"
   },
   "private": true,
