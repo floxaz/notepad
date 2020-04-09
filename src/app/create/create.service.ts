@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class CreateService {
       content,
       sheet
     };
-    this.http.post<any>('http://localhost:3000/api/notes/', body)
+    this.http.post<any>(`${environment.appUrl}/api/notes/`, body)
     .pipe(map(res => {
       const { note } = res.data;
       note.date = moment(note.date).fromNow();
@@ -31,7 +32,7 @@ export class CreateService {
   }
 
   fetchOneNote(id: string) {
-    return this.http.get<any>(`http://localhost:3000/api/notes/${id}`)
+    return this.http.get<any>(`${environment.appUrl}/api/notes/${id}`)
     .pipe(map(res => {
       return { ...res.data.note };
     }));
@@ -40,7 +41,7 @@ export class CreateService {
   updateNote(id: string, body: any) {
     body.date = new Date().toISOString();
     body.edited = true;
-    return this.http.patch<any>(`http://localhost:3000/api/notes/${id}`, body)
+    return this.http.patch<any>(`${environment.appUrl}/api/notes/${id}`, body)
     .pipe(map(res => {
       return res.data.note;
     }));
