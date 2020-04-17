@@ -15,7 +15,7 @@ export class NoteComponent  {
   @Input() date: string;
   @Input() set sheet(value: string) {
     this._sheet = value;
-    this.secondaryColor = LightenDarkenColor(value, -40);
+    this.secondaryColor = LightenDarkenColor('#' + value, -40);
   }
   get sheet(): string {
     return this._sheet;

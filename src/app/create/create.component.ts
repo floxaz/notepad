@@ -19,11 +19,11 @@ export class CreateComponent implements OnInit {
   subject: string;
   content: string;
   sheets = [
-    '#fae7cb',
-    '#4cd3c2',
-    '#e6739f',
-    '#ffbd69',
-    '#f2ed6f'
+    'fae7cb',
+    '4cd3c2',
+    'e6739f',
+    'ffbd69',
+    'f2ed6f'
   ];
   error = false;
   constructor(

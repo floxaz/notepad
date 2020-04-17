@@ -2,28 +2,60 @@ const Note = require('../models/noteModel');
 
 exports.getAllNotes = async (req, res) => {
   try {
-    console.log(req.query.search);
-    let notes = [];
-    if (!req.query.search) {
-      notes = await Note.find();
-    } else {
-      notes = await Note.find({
+    console.log(req.query);
+    const queryObj  = { ...req.query };
+    const exludedFields = ['sort', 'page', 'limit'];
+
+    exludedFields.forEach(field => {
+      delete queryObj[field];
+    });
+    console.log(queryObj);
+
+    let query = '';
+    if (!queryObj.search && !queryObj.sheet) {
+      query = Note.find();
+    } else if (queryObj.search && !queryObj.sheet) {
+      query = Note.find({
         $text: {
-          $search: req.query.search
+          $search: queryObj.search
         }
       });
-      if (notes.length === 0) {
-        throw new Error('No matched results');
-      }
+    } else if (!queryObj.search && queryObj.sheet) {
+      query = Note.find({
+        sheet: queryObj.sheet
+      });
+    } else {
+      query = Note.find({
+        $text: {
+          $search: queryObj.search
+        },
+        sheet: queryObj.sheet
+      });
     }
+
+    if (req.query.sort) {
+      query.sort(req.query.sort);
+    }
+
+    const page = +req.query.page || 1;
+    const limit = +req.query.limit || 10;
+    const skip = (page - 1) * limit;
+    query.skip(skip).limit(limit);
+
+    const notes = await query;
+    const totNotes = await Note.estimatedDocumentCount();
+    const pages = Math.ceil(totNotes / limit);
     res.json({
       status: 'success',
+      total: totNotes,
+      pages,
+      page,
       results: notes.length,
       data: {
         notes
       }
     })
-  } catch(err) {
+  } catch (err) {
     res.status(404);
     res.json({
       status: 'failure',

@@ -12,7 +12,7 @@
   <div class="create__sheets">
     <div class="create__sheet" *ngFor="let sheet of sheets, let index">
       <input type="radio" class="create__radio" formControlName="sheet" name="sheet" [value]="index" [id]="index">
-      <label [for]="index" class="create__color" [ngStyle]="{ backgroundColor: index }"></label>
+      <label [for]="index" class="create__color" [ngStyle]="{ backgroundColor: '#' + index }"></label>
     </div>
   </div>
   <button class="create__btn-submit btn" [disabled]="createForm.invalid || createForm.pristine">{{ btnText }}</button>
