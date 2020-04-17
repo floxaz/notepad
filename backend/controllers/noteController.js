@@ -2,7 +2,20 @@ const Note = require('../models/noteModel');
 
 exports.getAllNotes = async (req, res) => {
   try {
-    const notes = await Note.find();
+    console.log(req.query.search);
+    let notes = [];
+    if (!req.query.search) {
+      notes = await Note.find();
+    } else {
+      notes = await Note.find({
+        $text: {
+          $search: req.query.search
+        }
+      });
+      if (notes.length === 0) {
+        throw new Error('No matched results');
+      }
+    }
     res.json({
       status: 'success',
       results: notes.length,
@@ -11,7 +24,7 @@ exports.getAllNotes = async (req, res) => {
       }
     })
   } catch(err) {
-    res.status(400);
+    res.status(404);
     res.json({
       status: 'failure',
       message: err
