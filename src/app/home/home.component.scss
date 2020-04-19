@@ -6,8 +6,16 @@
     padding: 1rem 2rem;
   }
 
-  &__create {
+  &__menu {
+    display: flex;
+    justify-content: left;
     margin-bottom: 1rem;
+    align-items: stretch;
+    //flex-wrap: wrap-reverse;
+  }
+
+  &__create {
+    margin-right: 1rem;
   }
 
   &__close {
