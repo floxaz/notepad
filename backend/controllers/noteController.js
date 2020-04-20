@@ -2,7 +2,7 @@ const Note = require('../models/noteModel');
 
 exports.getAllNotes = async (req, res) => {
   try {
-    console.log(req.query);
+    console.log('query',req.query);
     const queryObj  = { ...req.query };
     const exludedFields = ['sort', 'page', 'limit'];
 

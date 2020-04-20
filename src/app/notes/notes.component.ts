@@ -4,6 +4,7 @@ import { NoteService } from './note/note.service';
 import { Subscription } from 'rxjs';
 import { CreateService } from '../create/create.service';
 import { Note } from '../shared/note.model';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-notes',
@@ -23,11 +24,11 @@ export class NotesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    // this.notesService.fetchNotes()
-    //   .subscribe(res => {
-    //     this.notes = res;
-    //     this.loading = false;
-    //   });
+    this.notesService.fetchNotes()
+      .subscribe(res => {
+        this.notes = res;
+        this.loading = false;
+      });
 
     this.deletedSub = this.noteService.deleted
       .subscribe(deletedId => {
@@ -38,6 +39,15 @@ export class NotesComponent implements OnInit, OnDestroy {
     this.createdSub = this.createService.created
       .subscribe(note => {
         this.notes.push(note);
+      });
+
+    this.notesService.notesFilter
+      .pipe(switchMap(params => {
+        console.log(params);
+        return this.notesService.fetchNotes(params);
+      }))
+      .subscribe(res => {
+        this.notes = res;
       });
   }
 

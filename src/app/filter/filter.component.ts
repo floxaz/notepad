@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotesService } from '../notes/notes.service';
 
 @Component({
   selector: 'app-filter',
@@ -23,8 +24,16 @@ export class FilterComponent implements OnInit {
     'Yellow'
   ];
   selectSheet = false;
+  search = null;
+
+  constructor(private notesService: NotesService) { }
 
   onSearch() {
+    this.search = this.searchForm.get('search').value;
+    this.notesService.notesFilter.next({ search: this.search });
+    if (this.search === '') {
+      this.searchForm.get('search').markAsPristine();
+    }
     console.log(this.searchForm);
   }
 
@@ -34,7 +43,8 @@ export class FilterComponent implements OnInit {
 
   ngOnInit() {
     this.searchForm = new FormGroup({
-      search: new FormControl(null, [Validators.required, Validators.maxLength(30)])
+      search: new FormControl(null, [
+        Validators.maxLength(30)])
     });
   }
 }

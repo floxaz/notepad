@@ -1,7 +1,7 @@
 <div class="filter">
   <form class="filter__searchForm" [formGroup]="searchForm" (submit)="onSearch()">
     <input type="text" class="filter__search" formControlName="search" maxlength="30">
-    <button type="submit" class="filter__submit" [disabled]="searchForm.invalid">
+    <button type="submit" class="filter__submit" [disabled]="searchForm.pristine">
       <svg class="filter__icon">
         <use href="assets/images/sprite.svg#icon-search" />
       </svg>
