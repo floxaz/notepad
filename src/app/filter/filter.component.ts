@@ -24,6 +24,7 @@ export class FilterComponent implements OnInit {
     'Yellow'
   ];
   @ViewChild('sheets') sheetsSelector: ElementRef;
+  @ViewChild('date') dateSelector: ElementRef;
   selectSheet = false;
 
   constructor(private notesService: NotesService) { }
@@ -45,6 +46,12 @@ export class FilterComponent implements OnInit {
       sheet = '';
     }
     this.notesService.notesFilter.next({ sheet });
+  }
+
+  onDateSelect() {
+    console.log(this.dateSelector.nativeElement.value);
+    const sort = this.dateSelector.nativeElement.value;
+    this.notesService.notesFilter.next({ sort });
   }
 
   ngOnInit() {

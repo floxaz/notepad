@@ -13,8 +13,8 @@
     <option class="filter__option" [value]="sheet" *ngFor="let sheet of sheets, let name of sheetNames">{{ name }}</option>
   </select>
 
-  <select name="date" class="filter__select filter__date">
-    <option class="filter__option" value="">Least recent</option>
-    <option class="filter__option" value="">Most recent</option>
+  <select name="date" class="filter__select filter__date" (change)="onDateSelect()" #date>
+    <option class="filter__option" value="date">Least recent</option>
+    <option class="filter__option" value="-date">Most recent</option>
   </select>
 </div>
