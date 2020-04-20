@@ -8,7 +8,7 @@
     </button>
   </form>
 
-  <select name="sheet" class="filter__select filter__sheets">
+  <select name="sheet" class="filter__select filter__sheets" (change)="onSelectSheet()" #sheets>
     <option class="filter__option" value="">All sheets</option>
     <option class="filter__option" [value]="sheet" *ngFor="let sheet of sheets, let name of sheetNames">{{ name }}</option>
   </select>

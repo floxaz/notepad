@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotesService } from '../notes/notes.service';
 
@@ -23,22 +23,28 @@ export class FilterComponent implements OnInit {
     'Orange',
     'Yellow'
   ];
+  @ViewChild('sheets') sheetsSelector: ElementRef;
   selectSheet = false;
-  search = null;
 
   constructor(private notesService: NotesService) { }
 
   onSearch() {
-    this.search = this.searchForm.get('search').value;
-    this.notesService.notesFilter.next({ search: this.search });
-    if (this.search === '') {
+    const search = this.searchForm.get('search').value;
+    this.notesService.notesFilter.next({ search });
+    if (search === '') {
       this.searchForm.get('search').markAsPristine();
     }
     console.log(this.searchForm);
   }
 
   onSelectSheet() {
-    this.selectSheet = !this.selectSheet;
+    const sheetName = this.sheetsSelector.nativeElement.value;
+    const index = this.sheetNames.indexOf(sheetName);
+    let sheet = this.sheets[index];
+    if (!sheet) {
+      sheet = '';
+    }
+    this.notesService.notesFilter.next({ sheet });
   }
 
   ngOnInit() {
