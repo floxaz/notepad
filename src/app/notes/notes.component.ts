@@ -43,7 +43,6 @@ export class NotesComponent implements OnInit, OnDestroy {
 
     this.notesService.notesFilter
       .pipe(switchMap(params => {
-        console.log(params);
         return this.notesService.fetchNotes(params);
       }))
       .subscribe(res => {

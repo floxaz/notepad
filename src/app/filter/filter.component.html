@@ -1,20 +1,20 @@
-<div class="filter">
-  <form class="filter__searchForm" [formGroup]="searchForm" (submit)="onSearch()">
+<form class="filter" [formGroup]="filterForm">
+  <form class="filter__searchForm" formGroupName="searchForm" (submit)="onSearch()">
     <input type="text" class="filter__search" formControlName="search" maxlength="30">
-    <button type="submit" class="filter__submit" [disabled]="searchForm.pristine">
+    <button type="submit" class="filter__submit" [disabled]="filterForm.get('searchForm').pristine">
       <svg class="filter__icon">
         <use href="assets/images/sprite.svg#icon-search" />
       </svg>
     </button>
   </form>
 
-  <select name="sheet" class="filter__select filter__sheets" (change)="onSelectSheet()" #sheets>
+  <select name="sheet" class="filter__select filter__sheets" (change)="filter()" formControlName="sheet" #sheets>
     <option class="filter__option" value="">All sheets</option>
     <option class="filter__option" [value]="sheet" *ngFor="let sheet of sheets, let name of sheetNames">{{ name }}</option>
   </select>
 
-  <select name="date" class="filter__select filter__date" (change)="onDateSelect()" #date>
+  <select name="date" class="filter__select filter__date" (change)="filter()" formControlName="sort" #date>
     <option class="filter__option" value="date">Least recent</option>
     <option class="filter__option" value="-date">Most recent</option>
   </select>
-</div>
+</form>

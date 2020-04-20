@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { NotesService } from '../notes/notes.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { NotesService } from '../notes/notes.service';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit {
-  searchForm: FormGroup;
+  filterForm: FormGroup;
   sheets = [
     'fae7cb',
     '4cd3c2',
@@ -30,34 +30,35 @@ export class FilterComponent implements OnInit {
   constructor(private notesService: NotesService) { }
 
   onSearch() {
-    const search = this.searchForm.get('search').value;
-    this.notesService.notesFilter.next({ search });
+    const search = this.filterForm.get('searchForm.search').value;
+    this.filter();
     if (search === '') {
-      this.searchForm.get('search').markAsPristine();
+      this.filterForm.get('searchForm').markAsPristine();
     }
-    console.log(this.searchForm);
   }
 
-  onSelectSheet() {
-    const sheetName = this.sheetsSelector.nativeElement.value;
+  filter() {
+    const sheetName = this.filterForm.get('sheet').value;
     const index = this.sheetNames.indexOf(sheetName);
     let sheet = this.sheets[index];
     if (!sheet) {
       sheet = '';
     }
-    this.notesService.notesFilter.next({ sheet });
-  }
-
-  onDateSelect() {
-    console.log(this.dateSelector.nativeElement.value);
-    const sort = this.dateSelector.nativeElement.value;
-    this.notesService.notesFilter.next({ sort });
+    const filterValues = {
+      sheet,
+      search: this.filterForm.get('searchForm.search').value || '',
+      sort: this.filterForm.get('sort').value
+    };
+    this.notesService.notesFilter.next(filterValues);
   }
 
   ngOnInit() {
-    this.searchForm = new FormGroup({
-      search: new FormControl(null, [
-        Validators.maxLength(30)])
+    this.filterForm = new FormGroup({
+      searchForm: new FormGroup({
+        search: new FormControl(null, Validators.maxLength(30))
+      }),
+      sheet: new FormControl(''),
+      sort: new FormControl('date')
     });
   }
 }
