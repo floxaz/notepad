@@ -16,8 +16,6 @@ export class CreateComponent implements OnInit {
   btnText = 'Attach';
   createForm: FormGroup;
   editedNoteId = undefined;
-  subject: string;
-  content: string;
   sheets = [
     'fae7cb',
     '4cd3c2',
@@ -63,15 +61,13 @@ export class CreateComponent implements OnInit {
           this.editedNoteId = id;
           return this.createService.fetchOneNote(id);
         }))
-      .subscribe(({ subject, content }) => {
+      .subscribe(({ subject, content, sheet }) => {
         this.loading = false;
-        this.subject = subject;
-        this.content = content;
 
         this.createForm.setValue({
           subject,
           content,
-          sheet: this.sheets[0]
+          sheet
         });
       }, () => {
         this.error = true;
