@@ -24,7 +24,7 @@ export class NotesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.notesService.fetchNotes()
+    this.notesService.fetchNotes({ sort: '-date' })
       .subscribe(res => {
         this.notes = res;
         this.loading = false;

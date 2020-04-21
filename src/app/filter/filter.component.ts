@@ -58,7 +58,7 @@ export class FilterComponent implements OnInit {
         search: new FormControl(null, Validators.maxLength(30))
       }),
       sheet: new FormControl(''),
-      sort: new FormControl('date')
+      sort: new FormControl('-date')
     });
   }
 }
