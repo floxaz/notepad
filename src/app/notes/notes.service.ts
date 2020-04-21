@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import * as moment from 'moment';
 import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotesService {
   notesFilter = new Subject<object>();
+  sortByMostRecent = new BehaviorSubject<boolean>(true);
   constructor(private http: HttpClient) { }
 
   fetchNotes(params = {}) {

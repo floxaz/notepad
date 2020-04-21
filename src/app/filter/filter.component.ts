@@ -37,6 +37,12 @@ export class FilterComponent implements OnInit {
     }
   }
 
+  sortByDate() {
+    const sort = this.filterForm.get('sort').value === '-date';
+    this.notesService.sortByMostRecent.next(sort);
+    this.filter();
+  }
+
   filter() {
     const sheetName = this.filterForm.get('sheet').value;
     const index = this.sheetNames.indexOf(sheetName);
@@ -60,5 +66,9 @@ export class FilterComponent implements OnInit {
       sheet: new FormControl(''),
       sort: new FormControl('-date')
     });
+
+    this.notesService.sortByMostRecent.next(
+      this.filterForm.get('sort').value === '-date'
+    );
   }
 }

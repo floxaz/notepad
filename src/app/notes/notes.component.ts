@@ -14,8 +14,10 @@ import { switchMap } from 'rxjs/operators';
 export class NotesComponent implements OnInit, OnDestroy {
   notes: Note[] = [];
   loading = true;
+  sortByMostRecent: boolean;
   deletedSub: Subscription;
   createdSub: Subscription;
+  sortSub: Subscription;
 
   constructor(
     private notesService: NotesService,
@@ -38,7 +40,17 @@ export class NotesComponent implements OnInit, OnDestroy {
 
     this.createdSub = this.createService.created
       .subscribe(note => {
-        this.notes.push(note);
+        if (this.sortByMostRecent) {
+          console.log('yes');
+          this.notes.unshift(note);
+        } else {
+          this.notes.push(note);
+        }
+      });
+
+    this.sortSub = this.notesService.sortByMostRecent
+      .subscribe(sort => {
+        this.sortByMostRecent = sort;
       });
 
     this.notesService.notesFilter
@@ -53,5 +65,6 @@ export class NotesComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.deletedSub.unsubscribe();
     this.createdSub.unsubscribe();
+    this.sortSub.unsubscribe();
   }
 }
