@@ -42,6 +42,8 @@ exports.getAllNotes = async (req, res) => {
     const skip = (page - 1) * limit;
     query.skip(skip).limit(limit);
 
+    query.select('-__v');
+
     const notes = await query;
     const totNotes = await Note.estimatedDocumentCount();
     const pages = Math.ceil(totNotes / limit);

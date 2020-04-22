@@ -3,8 +3,14 @@
 </div>
 <app-loading *ngIf="loading"></app-loading>
 <div class="notes__show">
+  {{ totalItems }}
   <app-note
-  *ngFor="let note of notes"
+  *ngFor="let note of notes | paginate: {
+    id: 'notes-paginate',
+    itemsPerPage: itemsPerPage,
+    currentPage: currentPage,
+    totalItems: totalItems
+  }"
   [id]="note._id"
   [subject]="note.subject"
   [content]="note.content"

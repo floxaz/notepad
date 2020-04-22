@@ -13,11 +13,15 @@ import { switchMap } from 'rxjs/operators';
 })
 export class NotesComponent implements OnInit, OnDestroy {
   notes: Note[] = [];
+  itemsPerPage: number;
+  currentPage: number;
+  totalItems: number;
   loading = true;
   sortByMostRecent: boolean;
   deletedSub: Subscription;
   createdSub: Subscription;
   sortSub: Subscription;
+  pageChangeSub: Subscription;
 
   constructor(
     private notesService: NotesService,
@@ -28,7 +32,11 @@ export class NotesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.notesService.fetchNotes({ sort: '-date' })
       .subscribe(res => {
-        this.notes = res;
+        console.log(res);
+        this.notes = res.data.notes;
+        this.itemsPerPage = res.results;
+        this.currentPage = res.page;
+        this.totalItems = res.total;
         this.loading = false;
       });
 
@@ -53,12 +61,24 @@ export class NotesComponent implements OnInit, OnDestroy {
         this.sortByMostRecent = sort;
       });
 
+    this.pageChangeSub = this.notesService.pageChanged
+      .pipe(switchMap(page => {
+        this.currentPage = page;
+        return this.notesService.fetchNotes({ page });
+      }))
+      .subscribe(res => {
+         this.notes = res.data.notes;
+      });
+
     this.notesService.notesFilter
       .pipe(switchMap(params => {
         return this.notesService.fetchNotes(params);
       }))
       .subscribe(res => {
-        this.notes = res;
+        this.notes = res.data.notes;
+        this.itemsPerPage = res.results;
+        this.currentPage = res.page;
+        this.totalItems = res.total;
       });
   }
 
@@ -66,5 +86,6 @@ export class NotesComponent implements OnInit, OnDestroy {
     this.deletedSub.unsubscribe();
     this.createdSub.unsubscribe();
     this.sortSub.unsubscribe();
+    this.pageChangeSub.unsubscribe();
   }
 }

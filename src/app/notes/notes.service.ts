@@ -11,13 +11,17 @@ import { Subject, BehaviorSubject } from 'rxjs';
 export class NotesService {
   notesFilter = new Subject<object>();
   sortByMostRecent = new BehaviorSubject<boolean>(true);
+  pageChanged = new Subject<number>();
+  totalPages = new Subject<number>();
   constructor(private http: HttpClient) { }
 
   fetchNotes(params = {}) {
     return this.http.get<any>(`${environment.appUrl}/api/notes`, { params })
     .pipe(map(res => {
-      const { notes } = res.data;
-      return this.formatData(notes);
+      console.log(res);
+      this.totalPages.next(res.pages);
+      this.formatData(res.data.notes);
+      return res;
     }), catchError(err => {
       return null;
     }));

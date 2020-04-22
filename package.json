@@ -29,6 +29,7 @@
     "moment": "^2.24.0",
     "mongoose": "^5.9.7",
     "morgan": "^1.10.0",
+    "ngx-pagination": "^5.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -44,7 +45,7 @@
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.4.1",
+    "karma": "^5.0.2",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~2.1.0",
     "karma-jasmine": "~3.0.1",
