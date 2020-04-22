@@ -27,23 +27,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   pageChanged(page: number) {
-    // console.log(page);
     this.notesService.pageChanged.next(page);
-    // if (page <= this.totalPages) {
-    //   this.notesService.pageChanged.next(page);
-    //   this.lastValidPage = page;
-    // }
-  }
-
-  correct(e) {
-    console.log(e);
-    //this.notesService.pageChanged.next(this.lastValidPage);
   }
 
   ngOnInit() {
     this.totalPagesSub = this.notesService.totalPages
     .subscribe(totalPages => {
-      console.log(totalPages);
       this.totalPages = totalPages;
     });
   }

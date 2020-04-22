@@ -44,12 +44,13 @@ export class NotesComponent implements OnInit, OnDestroy {
       .subscribe(deletedId => {
         const index = this.notes.findIndex(note => note._id === deletedId);
         this.notes.splice(index, 1);
+        this.totalItems -= 1;
       });
 
     this.createdSub = this.createService.created
       .subscribe(note => {
+        this.totalItems += 1;
         if (this.sortByMostRecent) {
-          console.log('yes');
           this.notes.unshift(note);
         } else {
           this.notes.push(note);
