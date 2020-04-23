@@ -28,6 +28,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   pageChanged(page: number) {
     this.notesService.pageChanged.next(page);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   ngOnInit() {
