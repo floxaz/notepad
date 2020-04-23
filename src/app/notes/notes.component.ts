@@ -29,14 +29,17 @@ export class NotesComponent implements OnInit, OnDestroy {
     private createService: CreateService
   ) { }
 
+  private updateProperties(res) {
+    this.notes = res.data.notes;
+    this.itemsPerPage = res.results;
+    this.currentPage = res.page;
+    this.totalItems = res.total;
+  }
+
   ngOnInit() {
     this.notesService.fetchNotes({ sort: '-date' })
       .subscribe(res => {
-        console.log(res);
-        this.notes = res.data.notes;
-        this.itemsPerPage = res.results;
-        this.currentPage = res.page;
-        this.totalItems = res.total;
+        this.updateProperties(res);
         this.loading = false;
       });
 
@@ -76,10 +79,7 @@ export class NotesComponent implements OnInit, OnDestroy {
         return this.notesService.fetchNotes(params);
       }))
       .subscribe(res => {
-        this.notes = res.data.notes;
-        this.itemsPerPage = res.results;
-        this.currentPage = res.page;
-        this.totalItems = res.total;
+        this.updateProperties(res);
       });
   }
 
