@@ -20,6 +20,12 @@
   &__close {
     background-color: #fe346e;
   }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
 }
 
 @media(min-width: 26.56em) {
@@ -28,6 +34,10 @@
       padding: 2rem 3rem;
       margin-bottom: 2rem;
     }
+
+    &__pagination {
+      margin-bottom: 1rem;
+    }
   }
 }
 
@@ -35,7 +45,11 @@
   .home {
     &__wall {
       padding: 3rem 4rem;
-      margin-bottom: 4rem;
+      margin-bottom: 2rem;
+    }
+
+    &__pagination {
+      margin-bottom: 1rem;
     }
   }
 }
@@ -44,7 +58,11 @@
   .home {
     &__wall {
       padding: 4rem 6rem;
-      margin-bottom: 6rem;
+      margin-bottom: 4rem;
+    }
+
+    &__pagination {
+      margin-bottom: 2rem;
     }
   }
 }

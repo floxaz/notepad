@@ -8,8 +8,13 @@
 <div class="home__wall">
   <app-notes></app-notes>
 </div>
-<pagination-controls
-id="notes-paginate"
-(pageChange)="pageChanged($event)"
->
+<div class="home__pagination">
+  <pagination-controls
+    class="home__pagination"
+    id="notes-paginate"
+    autoHide="true"
+    maxSize="5"
+    (pageChange)="pageChanged($event)"
+  >
 </pagination-controls>
+</div>
