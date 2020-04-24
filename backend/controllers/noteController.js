@@ -68,59 +68,6 @@ exports.getAllNotes = async (req, res) => {
   }
 };
 
-// exports.getAllNotes = async (req, res) => {
-//   try {
-//     //console.log('query',req.query);
-//     const queryObj = { ...req.query };
-//     const exludedFields = ["sort", "page", "limit"];
-
-//     exludedFields.forEach((field) => {
-//       delete queryObj[field];
-//     });
-//     //console.log(queryObj);
-
-//     let query = "";
-//     if (!queryObj.search && !queryObj.sheet) {
-//       query = Note.find();
-//     } else if (queryObj.search && !queryObj.sheet) {
-//       query = Note.find({
-//         $text: {
-//           $search: queryObj.search,
-//         },
-//       });
-//     } else if (!queryObj.search && queryObj.sheet) {
-//       query = Note.find({
-//         sheet: queryObj.sheet,
-//       });
-//     } else {
-//       query = Note.find({
-//         $text: {
-//           $search: queryObj.search,
-//         },
-//         sheet: queryObj.sheet,
-//       });
-//     }
-
-//     if (req.query.sort) {
-//       query.sort(req.query.sort);
-//     }
-
-//     const notesTot = await query.countDocuments();
-
-//     res.json({
-//       status: 'success',
-//       totNotes: notesTot
-//     })
-
-
-//   } catch (err) {
-//     res.json({
-//       status: 'failure',
-//       err
-//     });
-//   }
-// };
-
 exports.getNote = async (req, res) => {
   try {
     const { id } = req.params;
