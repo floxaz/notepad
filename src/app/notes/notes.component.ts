@@ -66,12 +66,21 @@ export class NotesComponent implements OnInit, OnDestroy {
       });
 
     this.pageChangeSub = this.notesService.pageChanged
-      .pipe(switchMap(page => {
-        this.currentPage = page;
-        return this.notesService.fetchNotes({ page });
-      }))
+      .pipe(
+        switchMap(page => {
+          this.currentPage = page;
+          return this.notesService.notesFilter;
+        }),
+        switchMap(params => {
+          params = {
+            ...params,
+            page: this.currentPage
+          };
+          console.log(params);
+          return this.notesService.fetchNotes(params);
+        }))
       .subscribe(res => {
-         this.notes = res.data.notes;
+        this.notes = res.data.notes;
       });
 
     this.notesService.notesFilter

@@ -9,7 +9,7 @@ import { Subject, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class NotesService {
-  notesFilter = new Subject<object>();
+  notesFilter = new BehaviorSubject<object>({});
   sortByMostRecent = new BehaviorSubject<boolean>(true);
   pageChanged = new Subject<number>();
   totalPages = new Subject<number>();
