@@ -9,19 +9,20 @@ import { Subject, BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class NotesService {
-  notesFilter = new BehaviorSubject<object>({});
   sortByMostRecent = new BehaviorSubject<boolean>(true);
-  pageChanged = new Subject<number>();
+  pageChanged = new Subject<null>();
   totalPages = new Subject<number>();
   constructor(private http: HttpClient) { }
 
-  fetchNotes(params = {}) {
+  fetchNotes(params) {
     return this.http.get<any>(`${environment.appUrl}/api/notes`, { params })
     .pipe(map(res => {
+      console.log(res);
       this.totalPages.next(res.pages);
       this.formatData(res.data.notes);
       return res;
     }), catchError(err => {
+      console.log(err);
       return null;
     }));
   }

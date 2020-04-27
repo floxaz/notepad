@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NotesService } from '../notes/notes.service';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   totalPages = 1;
   lastValidPage: number;
 
-  constructor(private notesService: NotesService) { }
+  constructor(
+    private notesService: NotesService,
+    private router: Router
+  ) { }
 
   onCreate = () => {
     this.createNote = !this.createNote;
@@ -27,7 +31,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   pageChanged(page: number) {
-    this.notesService.pageChanged.next(page);
+    this.notesService.pageChanged.next();
+    this.router.navigate([], {
+      queryParams: {
+        page
+      },
+      queryParamsHandling: 'merge'
+    });
     window.scrollTo({
       top: 0,
       behavior: 'smooth'

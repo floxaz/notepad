@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { NotesService } from '../notes/notes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-filter',
@@ -27,7 +28,10 @@ export class FilterComponent implements OnInit {
   @ViewChild('date') dateSelector: ElementRef;
   selectSheet = false;
 
-  constructor(private notesService: NotesService) { }
+  constructor(
+    private notesService: NotesService,
+    private router: Router
+  ) { }
 
   onSearch() {
     const search = this.filterForm.get('searchForm.search').value;
@@ -55,7 +59,11 @@ export class FilterComponent implements OnInit {
       search: this.filterForm.get('searchForm.search').value || '',
       sort: this.filterForm.get('sort').value
     };
-    this.notesService.notesFilter.next(filterValues);
+    this.router.navigate(['/'], {
+      queryParams: {
+        ...filterValues
+      }
+    });
   }
 
   ngOnInit() {

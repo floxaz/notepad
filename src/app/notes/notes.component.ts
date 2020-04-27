@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { CreateService } from '../create/create.service';
 import { Note } from '../shared/note.model';
 import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-notes',
@@ -16,31 +17,48 @@ export class NotesComponent implements OnInit, OnDestroy {
   itemsPerPage: number;
   currentPage: number;
   totalItems: number;
+  pageChanged = false;
   loading = true;
   sortByMostRecent: boolean;
   deletedSub: Subscription;
   createdSub: Subscription;
   sortSub: Subscription;
   pageChangeSub: Subscription;
+  queryParams: any;
 
   constructor(
     private notesService: NotesService,
     private noteService: NoteService,
-    private createService: CreateService
+    private createService: CreateService,
+    private route: ActivatedRoute
   ) { }
 
   private updateProperties(res) {
-    this.notes = res.data.notes;
-    this.itemsPerPage = res.results;
-    this.currentPage = res.page;
-    this.totalItems = res.total;
+    // pagination bar breaks if you continuously update all 4 values
+    if (!this.pageChanged) {
+      this.notes = res.data.notes;
+      this.currentPage = res.page;
+      this.itemsPerPage = res.results;
+      this.totalItems = res.total;
+    } else {
+      this.notes = res.data.notes;
+      this.currentPage = res.page;
+    }
   }
 
   ngOnInit() {
-    this.notesService.fetchNotes({ sort: '-date' })
+    this.route.queryParams
+      .pipe(switchMap(params => {
+        this.queryParams = {...params};
+        if (!this.queryParams.sort) {
+          this.queryParams.sort = '-date';
+        }
+        return this.notesService.fetchNotes(this.queryParams);
+      }))
       .subscribe(res => {
         this.updateProperties(res);
         this.loading = false;
+        this.pageChanged = false;
       });
 
     this.deletedSub = this.noteService.deleted
@@ -66,29 +84,8 @@ export class NotesComponent implements OnInit, OnDestroy {
       });
 
     this.pageChangeSub = this.notesService.pageChanged
-      .pipe(
-        switchMap(page => {
-          this.currentPage = page;
-          return this.notesService.notesFilter;
-        }),
-        switchMap(params => {
-          params = {
-            ...params,
-            page: this.currentPage
-          };
-          console.log(params);
-          return this.notesService.fetchNotes(params);
-        }))
-      .subscribe(res => {
-        this.notes = res.data.notes;
-      });
-
-    this.notesService.notesFilter
-      .pipe(switchMap(params => {
-        return this.notesService.fetchNotes(params);
-      }))
-      .subscribe(res => {
-        this.updateProperties(res);
+      .subscribe(() => {
+        this.pageChanged = true;
       });
   }
 
