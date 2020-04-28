@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CreateService } from './create.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create',
@@ -27,7 +28,8 @@ export class CreateComponent implements OnInit {
   constructor(
     private createService: CreateService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private location: Location) { }
 
   onSubmit() {
     if (this.creationMode) {
@@ -40,7 +42,7 @@ export class CreateComponent implements OnInit {
   }
 
   onGoBack() {
-    this.router.navigate(['/']);
+    this.location.back();
   }
 
   setForm = (subject = null, content = null) => {

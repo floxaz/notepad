@@ -46,7 +46,6 @@ exports.getAllNotes = async (req, res) => {
 
     query.select('-__v');
     const notes = await query;
-    console.log('sadasdas');
     const pages = Math.ceil(totNotes / limit);
     res.json({
       status: 'success',
