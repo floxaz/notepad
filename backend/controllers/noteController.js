@@ -52,6 +52,7 @@ exports.getAllNotes = async (req, res) => {
       total: totNotes,
       pages,
       page,
+      pageLimit: limit,
       results: notes.length,
        data: {
          notes

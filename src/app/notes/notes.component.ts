@@ -38,7 +38,7 @@ export class NotesComponent implements OnInit, OnDestroy {
     if (!this.pageChanged) {
       this.notes = res.data.notes;
       this.currentPage = res.page;
-      this.itemsPerPage = res.results;
+      this.itemsPerPage = res.pageLimit;
       this.totalItems = res.total;
     } else {
       this.notes = res.data.notes;

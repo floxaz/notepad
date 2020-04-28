@@ -17,7 +17,6 @@ export class NotesService {
   fetchNotes(params) {
     return this.http.get<any>(`${environment.appUrl}/api/notes`, { params })
     .pipe(map(res => {
-      console.log(res);
       this.totalPages.next(res.pages);
       this.formatData(res.data.notes);
       return res;

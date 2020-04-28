@@ -76,8 +76,6 @@ export class FilterComponent implements OnInit {
       sort: new FormControl('-date')
     });
 
-    console.log(this.filterForm.value);
-
     this.route.queryParams
     .subscribe(params => {
       const sheetName = this.sheetNames[this.sheets.indexOf(params.sheet)];
