@@ -28,7 +28,6 @@ export class CreateComponent implements OnInit {
   constructor(
     private createService: CreateService,
     private route: ActivatedRoute,
-    private router: Router,
     private location: Location) { }
 
   onSubmit() {

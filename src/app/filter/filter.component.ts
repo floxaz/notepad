@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { NotesService } from '../notes/notes.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-filter',
@@ -30,7 +30,8 @@ export class FilterComponent implements OnInit {
 
   constructor(
     private notesService: NotesService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   onSearch() {
@@ -73,6 +74,23 @@ export class FilterComponent implements OnInit {
       }),
       sheet: new FormControl(''),
       sort: new FormControl('-date')
+    });
+
+    console.log(this.filterForm.value);
+
+    this.route.queryParams
+    .subscribe(params => {
+      const sheetName = this.sheetNames[this.sheets.indexOf(params.sheet)];
+      const formValues = {
+        searchForm: {
+          search: params.search || null
+        },
+        sheet: sheetName || '',
+        sort: params.sort || '-date'
+      };
+      this.filterForm.patchValue({
+        ...formValues
+      });
     });
 
     this.notesService.sortByMostRecent.next(
