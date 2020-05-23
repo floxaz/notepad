@@ -4,6 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 const noteRoutes = require('./routes/noteRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 if (process.env.NODE_ENV === 'development') {
@@ -15,6 +16,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/api/notes', noteRoutes);
+app.use('/api/users', userRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'public')));
