@@ -15,10 +15,12 @@ import { NoteComponent } from './notes/note/note.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotFoundComponent } from './notFound/notFoundComponent';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    WelcomeComponent,
     HomeComponent,
     CreateComponent,
     FilterComponent,

@@ -127,3 +127,13 @@ exports.protect = async (req, res, next) => {
   req.user = currentUser;
   next();
 };
+
+exports.forgotPassword = async (req, res) => {
+  const email = req.body.email;
+  const user = User.findOne({ email });
+  if (!user) {
+    throw new AppError('There is no user with that email address!', 404);
+  }
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+}

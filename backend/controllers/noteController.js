@@ -11,19 +11,24 @@ exports.getAllNotes = async (req, res) => {
 
     let query = '';
     if (!queryObj.search && !queryObj.sheet) {
-      query = Note.find();
+      query = Note.find({
+        user_email: req.headers.user
+      });
     } else if (queryObj.search && !queryObj.sheet) {
       query = Note.find({
+        user_email: req.headers.user,
         $text: {
           $search: queryObj.search
         }
       });
     } else if (!queryObj.search && queryObj.sheet) {
       query = Note.find({
+        user_email: req.headers.user,
         sheet: queryObj.sheet
       });
     } else {
       query = Note.find({
+        user_email: req.headers.user,
         $text: {
           $search: queryObj.search
         },
@@ -92,6 +97,7 @@ exports.createNote = async (req, res) => {
     const newNote = await Note.create({
       subject: req.body.subject,
       content: req.body.content,
+      user_email: req.body.user_email,
       sheet: req.body.sheet
     });
     res.json({

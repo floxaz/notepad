@@ -9,6 +9,10 @@ const noteSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  user_email: {
+    type: String,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now
